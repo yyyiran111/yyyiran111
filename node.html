@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>哥哥送给宝贝的小世界</title>
+  <!-- 导入一个可爱的字体（可选） -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
+  <style>
+    /* ======= 页面整体风格 ======= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "ZCOOL KuaiLe", "微软雅黑", sans-serif;
+      background: linear-gradient(135deg, #ffe9e3, #fff5dc);
+      color: #444;
+    }
+    /* 为了让内容在手机上也好看，限制最大宽度并居中 */
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    /* 一些柔和的过渡效果 */
+    button, input {
+      transition: all 0.3s ease;
+    }
+
+    /* ======= 头部区域 ======= */
+    header {
+      text-align: center;
+      padding: 40px 0;
+    }
+    header h1 {
+      font-size: 2rem;
+      color: #ff8674;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 2px rgba(255, 120, 100, 0.3);
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #666;
+    }
+
+    /* ======= 分区标题 ======= */
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #ff8674;
+      text-align: center;
+    }
+
+    /* ======= 卡片布局 ======= */
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      margin: 20px 0;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(255, 184, 170, 0.4);
+    }
+
+    /* ======= 按钮样式 ======= */
+    button {
+      background-color: #ffb8aa;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #ff8674;
+      transform: translateY(-2px);
+    }
+
+    /* ======= 文本展示区域（暖心话、星座提示等） ======= */
+    .warm-message {
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fffaf8;
+      border: 2px dashed #ffd6ce;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 15px;
+      font-size: 1rem;
+      color: #666;
+      text-align: center;
+      transition: background 0.3s ease;
+    }
+
+    /* ======= 秘密空间 ======= */
+    .secret-section {
+      background: #fffdfc;
+    }
+    .secret-input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .secret-input input[type="password"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      margin-right: 10px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* ======= 秘密内容 ======= */
+    .secret-message {
+      margin-top: 10px;
+      background: #fffaf8;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #666;
+      border: 2px dashed #ffd6ce;
+    }
+
+    /* ======= 底部区域 ======= */
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #999;
+      font-size: 0.9rem;
+      padding-bottom: 20px;
+    }
+    footer p {
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 页面头部：标题 + 祝福语 -->
+    <header>
+      <h1>哥哥送给宝贝的小世界</h1>
+      <p>宝贝，愿这方小天地能存放下你我的所有温暖与回忆～</p>
+    </header>
+
+    <!-- 每日暖心话卡片 -->
+    <section class="card">
+      <h2>每日暖心话</h2>
+      <div class="warm-message" id="warmMessage">
+        点击下方按钮，获取哥哥的暖心话~
+      </div>
+      <div style="text-align: center; margin-top: 10px;">
+        <button id="messageBtn">生成暖心话</button>
+      </div>
+    </section>
+
+    <!-- 星座提示卡片 -->
+    <section class="card">
+      <h2>星座小提示</h2>
+      <div class="warm-message" id="starMessage">
+        这里会显示一个温暖的小贴士哦～
+      </div>
+      <div style="text-align: center; margin-top: 10px;">
+        <button id="starBtn">来一则星座提示</button>
+      </div>
+    </section>
+
+    <!-- 秘密空间卡片 -->
+    <section class="card secret-section">
+      <h2>只属于我们的小秘密</h2>
+      <p style="text-align:center; color:#666;">输入专属“暗号”，才可以看见哦～</p>
+      <div class="secret-input">
+        <input type="password" id="secretKey" placeholder="输入暗号" />
+        <button id="secretBtn">查看秘密</button>
+      </div>
+      <div class="secret-message" id="secretContent" style="display: none;"></div>
+    </section>
+
+    <!-- 页面底部 -->
+    <footer>
+      <p>哥哥一直在这里陪着你，希望每一天都能为你带去暖暖的爱和快乐。</p>
+      <p>——献给最珍贵的宝贝</p>
+    </footer>
+  </div>
+
+  <script>
+    // ====== 每日暖心话 ======
+    const warmMessages = [
+      "宝贝，你的每一句话都能让哥哥的心轻轻荡漾。",
+      "无论世界怎么变，哥哥对你的心永远不会变。",
+      "你的小心愿，也是哥哥的大目标。",
+      "只要想到你，哥哥就觉得一切都那么美好。",
+      "每天都想把最好的温柔，通通打包送给你。",
+      "无论白天黑夜，哥哥最喜欢的都是和你在一起。",
+      "你是我心里的小太阳，带给我无穷无尽的温暖。",
+      "把所有甜甜的小日子，都想和你一起度过。"
+    ];
+    const messageBtn = document.getElementById("messageBtn");
+    const warmMessageDiv = document.getElementById("warmMessage");
+
+    messageBtn.addEventListener("click", () => {
+      const randomIndex = Math.floor(Math.random() * warmMessages.length);
+      warmMessageDiv.textContent = warmMessages[randomIndex];
+    });
+
+    // ====== 星座提示 ======
+    const starTips = [
+      "今天适合给喜欢的人一个温暖的拥抱哦～",
+      "把你的烦恼说出来，可能就能得到意外的惊喜和帮助。",
+      "和爱的人一起吃顿小甜点，会让心情up~",
+      "愿你的努力配得上所有想要的美好。",
+      "幸福其实很简单，一句话、一个微笑就能融化心房。",
+      "浪漫不分时间，愿我们每天都能制造小惊喜。"
+    ];
+    const starBtn = document.getElementById("starBtn");
+    const starMessageDiv = document.getElementById("starMessage");
+
+    starBtn.addEventListener("click", () => {
+      const randomIndex = Math.floor(Math.random() * starTips.length);
+      starMessageDiv.textContent = starTips[randomIndex];
+    });
+
+    // ====== 秘密空间 ======
+    // 这里依然用一个非常简单的Base64方式示例
+    // 暗号改成英文/数字方便输入
+    // 如果 key === 'womenDexiaoMimi' 则显示秘密
+    const secretData = btoa("宝贝，这是我们独一无二的回忆。在这段旅程里，你的存在，让哥哥更加勇敢、更加温暖。无论未来怎样变化，我都想牵着你的手一直走下去。");
+    const secretBtn = document.getElementById("secretBtn");
+    const secretContent = document.getElementById("secretContent");
+    const secretKey = document.getElementById("secretKey");
+
+    secretBtn.addEventListener("click", () => {
+      const key = secretKey.value.trim();
+      if (key === "womenDexiaoMimi") {
+        const decoded = atob(secretData);
+        secretContent.textContent = decoded;
+        secretContent.style.display = "block";
+      } else {
+        secretContent.textContent = "暗号不正确哦～宝贝再想想？";
+        secretContent.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
