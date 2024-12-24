@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>哥哥的圣诞礼物</title>
+  <style>
+    /* 简单的页面样式 */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "微软雅黑", sans-serif;
+      background: #fff7f0;
+      color: #333;
+    }
+    header, main, footer {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      background: #fff1e6;
+      padding: 40px 20px;
+      border-bottom: 2px solid #ffd4a5;
+    }
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    header p {
+      font-size: 1.1rem;
+    }
+    button {
+      background-color: #ffd4a5;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px 0;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #ffc08b;
+    }
+    .warm-message {
+      margin: 10px 0;
+      background: #fff1e6;
+      padding: 15px;
+      border-radius: 8px;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      text-align: center;
+    }
+    /* 趣味功能区 */
+    .feature-section {
+      background: #ffeadd;
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .secret-section {
+      background: #ffeceb;
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    input[type="password"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+      border-radius: 4px;
+    }
+    .secret-message {
+      margin-top: 10px;
+      background: #fff9f8;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 首页：哥哥的祝福与心意 -->
+  <header>
+    <h1>给我家宝贝的圣诞惊喜</h1>
+    <p>宝贝，圣诞快乐～这是哥哥为你特别准备的小小世界，愿它能装下我们所有的欢笑和回忆。</p>
+  </header>
+
+  <main>
+    <!-- 每日暖心话按钮 -->
+    <section>
+      <h2>每日暖心话</h2>
+      <div class="warm-message" id="warmMessage">
+        点一下下面的按钮，哥哥送你一句小心意~
+      </div>
+      <button id="messageBtn">生成暖心话</button>
+    </section>
+
+    <!-- 有趣的小功能区（示例：星座小提示） -->
+    <section class="feature-section">
+      <h2>小星座小游戏</h2>
+      <p>宝贝想看看今天的星座运势吗？</p>
+      <button id="starBtn">来一则星座提示</button>
+      <div class="warm-message" id="starMessage">
+        这里会显示哥哥给你准备的星座小提示哦～
+      </div>
+    </section>
+
+    <!-- 专属秘密空间（简单加密示例） -->
+    <section class="secret-section">
+      <h2>只属于我们的小秘密空间</h2>
+      <p>输入我们之间的“暗号”才能看到哦～</p>
+      <input type="password" id="secretKey" placeholder="输入暗号" />
+      <button id="secretBtn">查看秘密</button>
+      <div class="secret-message" id="secretContent" style="display: none;">
+        <!-- 初始隐藏，验证通过后显示 -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>哥哥的圣诞礼物 · 送给我家宝贝</p>
+  </footer>
+
+  <script>
+    // ======== 每日暖心话功能 ========
+    const warmMessages = [
+      "宝贝，每一次想到你，都能让我心中暖暖的。",
+      "你是哥哥的光，驱散我心里的阴霾。",
+      "比起圣诞礼物，你才是我此生最珍贵的存在。",
+      "看到你，所有烦恼都消失得无影无踪。",
+      "宝贝，你的笑容是我一天中最温暖的太阳。",
+      "每天都想快点见到你，想把所有温柔都给你。",
+      "最想与你一起拥抱每一个朝阳，迎接每一个甜蜜的夜晚。",
+      "爱你，是我最想坚持到永远的事。"
+    ];
+
+    const messageBtn = document.getElementById("messageBtn");
+    const warmMessageDiv = document.getElementById("warmMessage");
+
+    messageBtn.addEventListener("click", () => {
+      const randomIndex = Math.floor(Math.random() * warmMessages.length);
+      warmMessageDiv.textContent = warmMessages[randomIndex];
+    });
+
+    // ======== 星座小提示功能（示例） ========
+    const starTips = [
+      "今天适合和喜欢的人说悄悄话，多一点浪漫和惊喜。",
+      "不要太焦虑哦，运势会在下午慢慢回升！",
+      "如果有时间，和喜欢的人去吃美味的甜点会带来好心情。",
+      "遇到一点小问题别怕，沟通能解决很多烦恼。",
+      "相信你的直觉，它会指引你遇见更好的自己。",
+      "尝试给自己和爱人安排一场小小的惊喜之旅吧！"
+    ];
+
+    const starBtn = document.getElementById("starBtn");
+    const starMessageDiv = document.getElementById("starMessage");
+
+    starBtn.addEventListener("click", () => {
+      const randomIndex = Math.floor(Math.random() * starTips.length);
+      starMessageDiv.textContent = starTips[randomIndex];
+    });
+
+    // ======== 专属秘密空间 ========
+    // 这里仅用一个非常简单的方式做加密示例：将文字base64
+    // 实际开发可以考虑更安全的方式
+    const secretData = btoa("宝贝，这是我们独一无二的回忆。感谢你一直在我身边，今后也让哥哥守护你，爱你，一起走过每一个春夏秋冬。");
+    const secretBtn = document.getElementById("secretBtn");
+    const secretContent = document.getElementById("secretContent");
+    const secretKey = document.getElementById("secretKey");
+
+    secretBtn.addEventListener("click", () => {
+      const key = secretKey.value.trim();
+      // 你可以随意修改这个“暗号”，只要和下面判断保持一致就行
+      if (key === "我们的小秘密") {
+        // base64解码后显示
+        const decoded = atob(secretData);
+        secretContent.textContent = decoded;
+        secretContent.style.display = "block";
+      } else {
+        secretContent.textContent = "暗号不正确哦，宝贝再想想？";
+        secretContent.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
